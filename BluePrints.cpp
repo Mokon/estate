@@ -26,8 +26,7 @@ BluePrints::initSceneGraph()
 void
 BluePrints::sketch()
 {
-    addRoom(osg::Vec3f(), {1,1}, {2,1}, {1,1});
-    addRoom(osg::Vec3f(), {2,1}, {1,1}, {1,1});
+    #include "Sketch.hpp"
 }
 
 void

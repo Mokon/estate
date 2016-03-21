@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <osgViewer/Viewer>
+
 namespace estate {
 
 class BluePrints {
@@ -19,6 +21,18 @@ class BluePrints {
     BluePrints(const BluePrints&&) = delete;
 
     BluePrints& operator=(const BluePrints&&) = delete;
+    
+    int run();
+
+    void sketch();
+
+  private:
+
+    void initSceneGraph();
+       
+    osgViewer::Viewer viewer ;
+    
+    osg::ref_ptr<osg::Group> root;
 
 };
 

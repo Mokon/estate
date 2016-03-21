@@ -13,6 +13,6 @@ AM_CXXFLAGS += -Wmissing-field-initializers -Wparentheses -Wformat=2
 #AM_CXXFLAGS += -fext-numeric-literals -Wzero-as-null-pointer-constant
 
 all:
-	clang++ ${AM_CXXFLAGS} *.cpp -o BluePrint
+	clang++ ${AM_CXXFLAGS} -losg -losgViewer -losgSim -lm -ldl -lGL -lGLU -lpthread -lXext -lX11 *.cpp -o BluePrint
 clean:
 	/bin/rm -rf BluePrint

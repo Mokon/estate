@@ -2,6 +2,7 @@
 
 #include "BluePrints.hpp"
 #include "OsgExtensions.hpp"
+#include <osg/PolygonMode>
 #include <osg/ShapeDrawable>
 #include <osg/Shape>
 #include <osgViewer/ViewerEventHandlers>
@@ -17,7 +18,7 @@ void
 BluePrints::initSceneGraph()
 {
     root = osg::make_ref<osg::Group>();
-    viewer.setSceneData(root.get()); 
+    viewer.setSceneData(root.get());
     viewer.setThreadingModel(osgViewer::Viewer::ThreadingModel::SingleThreaded);
     viewer.addEventHandler(osg::make_ref<osgViewer::WindowSizeHandler>());
 }
@@ -39,6 +40,15 @@ BluePrints::addRoom(const osg::Vec3& center, const Measurement& width,
                                        height.getNormalized());
     auto drawable = osg::make_ref<osg::ShapeDrawable>(box.get());
     geode->addDrawable(drawable.get());
+
+    auto stateset = osg::make_ref<osg::StateSet>();
+    auto polymode = osg::make_ref<osg::PolygonMode>();
+    polymode->setMode(osg::PolygonMode::FRONT_AND_BACK,osg::PolygonMode::LINE);
+    stateset->setAttributeAndModes(polymode,
+                                   osg::StateAttribute::OVERRIDE|
+                                    osg::StateAttribute::ON);
+
+    geode->setStateSet(stateset.get());
     root->addChild(geode.get());
 }
 

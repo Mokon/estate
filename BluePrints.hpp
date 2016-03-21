@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Measurement.hpp"
 #include <osgViewer/Viewer>
 
 namespace estate {
@@ -25,6 +26,9 @@ class BluePrints {
     int run();
 
     void sketch();
+
+    void addRoom(const osg::Vec3& center, const Measurement& width,
+                 const Measurement& length, const Measurement& height);
 
   private:
 

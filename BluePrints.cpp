@@ -1,12 +1,10 @@
 /* Copyright (C) 2016 David 'Mokon' Bond,  All Rights Reserved */
 
-#include "OsgExtensions.hpp"
-
 #include "BluePrints.hpp"
-
-#include <osgViewer/ViewerEventHandlers>
-#include <osgGA/StateSetManipulator>
+#include "OsgExtensions.hpp"
 #include <osg/ShapeDrawable>
+#include <osg/Shape>
+#include <osgViewer/ViewerEventHandlers>
 
 namespace estate {
 
@@ -27,11 +25,21 @@ BluePrints::initSceneGraph()
 void
 BluePrints::sketch()
 {
-    auto myshapegeode = osg::make_ref<osg::Geode>();
-    auto myCapsule = osg::make_ref<osg::Capsule>(osg::Vec3f(), 1, 2);
-    auto capsuledrawable = osg::make_ref<osg::ShapeDrawable>(myCapsule.get());
-    myshapegeode->addDrawable(capsuledrawable.get());
-    root->addChild(myshapegeode.get());
+    addRoom(osg::Vec3f(), {1,1}, {2,1}, {1,1});
+    addRoom(osg::Vec3f(), {2,1}, {1,1}, {1,1});
+}
+
+void
+BluePrints::addRoom(const osg::Vec3& center, const Measurement& width,
+                    const Measurement& length, const Measurement& height)
+{
+    auto geode = osg::make_ref<osg::Geode>();
+    auto box = osg::make_ref<osg::Box>(center, width.getNormalized(),
+                                       length.getNormalized(),
+                                       height.getNormalized());
+    auto drawable = osg::make_ref<osg::ShapeDrawable>(box.get());
+    geode->addDrawable(drawable.get());
+    root->addChild(geode.get());
 }
 
 int

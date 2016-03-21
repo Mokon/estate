@@ -41,12 +41,3 @@ BluePrints::run()
 }
 
 }
-
-int
-main()
-{
-    estate::BluePrints estate;
-    estate.sketch();
-
-    return estate.run();
-}

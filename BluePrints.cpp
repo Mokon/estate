@@ -30,13 +30,20 @@ BluePrints::sketch()
 }
 
 void
-BluePrints::addRoom(const osg::Vec3& center, const Measurement& width,
+BluePrints::addRoom(const std::string& name,
+                    const osg::Vec3& floorFrontLeft, const Measurement& width,
                     const Measurement& length, const Measurement& height)
 {
+    (void)name;
+    // TODO add vec3 using measurements
+    auto y = width.getNormalized();
+    auto x = length.getNormalized();
+    auto z = height.getNormalized();
+    auto center = osg::Vec3(floorFrontLeft.y()*12 + x/2.0f,
+                            floorFrontLeft.x()*12 + y/2.0f,
+                            floorFrontLeft.z()*12 + z/2.0f);
     auto geode = osg::make_ref<osg::Geode>();
-    auto box = osg::make_ref<osg::Box>(center, width.getNormalized(),
-                                       length.getNormalized(),
-                                       height.getNormalized());
+    auto box = osg::make_ref<osg::Box>(center, x, y, z);
     auto drawable = osg::make_ref<osg::ShapeDrawable>(box.get());
     geode->addDrawable(drawable.get());
 

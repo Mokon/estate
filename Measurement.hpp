@@ -28,7 +28,7 @@ class Measurement {
 
     Measurement& operator=(const Measurement&&) = delete;
 
-    float
+    auto
     getNormalized() const
     {
         return normalized;

@@ -27,7 +27,8 @@ class BluePrints {
 
     void sketch();
 
-    void addRoom(const osg::Vec3& center, const Measurement& width,
+    void addRoom(const std::string& name,
+                 const osg::Vec3& floorFrontLeft, const Measurement& width,
                  const Measurement& length, const Measurement& height);
 
   private:
